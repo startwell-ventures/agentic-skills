@@ -6,6 +6,7 @@ e4stwood's personal agent skills for **agentic execution**, **repo foundations**
 
 | Skill | What it does |
 | --- | --- |
+| [build-with-fable](./build-with-fable) | Set up and run a Fable-led, Codex-assisted build workflow where Fable owns judgment and Codex handles well-specified execution, computer use, verification, reviews, and rescue tasks. |
 | [grill-with-docs](./grill-with-docs) | Research and stress-test a plan against the repo's code, domain language, and prior decisions, then update `CONTEXT.md`, ADRs, `AGENTS.md`, `CLAUDE.md`, and foundation docs before implementation. |
 | [grill-me-goal](./grill-me-goal) | Turn a vague objective into a durable, repo-local **goal package** — a complete goal prompt plus docs and a phased, evidence-gated acceptance-criteria checklist — that an agent can execute for hundreds of hours across many sessions. Built to be run by Codex's long-running `/goal` skill. |
 | [ripple-check](./ripple-check) | After a code change, run a deep **ripple-effect analysis** across every internal consumer and external dependency, fix each ripple test-first (`/tdd` red→green→refactor), extend coverage over all externalities, run full validation, and update docs. |
@@ -34,12 +35,14 @@ Invoke with `/<skill-name>` (Claude Code) or `$<skill-name>` (Codex).
   npx skills add mattpocock/skills
   ```
 - **Codex long-running `/goal`** — `grill-me-goal` produces the package; the Codex `/goal` skill executes it over long, multi-session runs by pointing at the generated goal prompt.
+- **[openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc)** — lets Claude Code call Codex for reviews, adversarial reviews, rescue tasks, status/result polling, and transfer into Codex.
 
 ## Recommended flow
 
 1. **`grill-with-docs`** - establish language, repo foundations, agent guidance, and ADRs.
 2. **`grill-me-goal`** - turn the scoped objective into a long-running goal package with A/Cs.
-3. **`ripple-check`** - after implementation changes, audit the blast radius test-first.
+3. **`build-with-fable`** - orchestrate substantial implementation with Fable judgment and Codex execution/verification.
+4. **`ripple-check`** - after implementation changes, audit the blast radius test-first.
 
 ## Repo conventions
 
