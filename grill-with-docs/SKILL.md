@@ -1,6 +1,6 @@
 ---
 name: grill-with-docs
-description: Research and stress-test a plan against a repo's actual code, domain language, docs, and architectural decisions while updating CONTEXT.md, ADRs, AGENTS.md, CLAUDE.md, and related project docs. Use when the user wants to be grilled on a plan/design, sharpen terminology, establish foundations for a new repo, align agents around project principles, or turn vague intent into durable documented decisions before implementation.
+description: Research and stress-test a plan against a repo's actual code, domain language, docs, and architectural decisions with many rounds of dense multiple-choice questions while updating CONTEXT.md, ADRs, AGENTS.md, CLAUDE.md, question logs, and related project docs. Use when the user wants to be grilled on a plan/design, sharpen terminology, establish foundations for a new repo, align agents around project principles, or turn vague intent into durable documented decisions before implementation.
 ---
 
 # Grill With Docs
@@ -32,10 +32,112 @@ If blocked, record the blocker and continue with the next useful unblocked resea
 2. If this is a new or under-documented repo, run the New Repo Foundation Gate before implementation planning.
 3. Launch bounded side-mission research with subagents when available and allowed. If subagents are unavailable, perform the same research locally instead of stopping.
 4. Do internet research for external APIs, SDKs, frameworks, platform limits, compliance constraints, or best practices whenever the plan depends on facts that may be stale. Prefer official docs and primary sources.
-5. Ask 2-10 rounds of batched multiple-choice questions. Default to 3-5 rounds for substantial work; use 6-10 for new repos, ambiguous domains, high-risk architecture, or long-running projects.
+5. Ask 2-10 rounds of batched multiple-choice questions using the Question Engine below. Default to 4-6 rounds for substantial work; use 6-10 for new repos, ambiguous domains, high-risk architecture, or long-running projects.
 6. Challenge the plan against actual code, existing docs, domain language, and prior decisions.
 7. Update docs inline as terms and decisions stabilize. Do not batch everything until the end.
 8. Finish with a short summary of documents changed, unresolved questions, new ADRs, foundation gaps, and the recommended next action. If the result should become a long-running goal package, recommend `grill-me-goal`.
+
+## Question Engine
+
+The skill succeeds or fails on question quality. Ask many specific questions, but make each question earn its place by resolving a real decision or exposing a dangerous ambiguity.
+
+### Round Counts
+
+Use these defaults unless the user explicitly requests a shorter or longer grilling session:
+
+- Small docs-only clarification: 2-3 rounds, 6-10 questions per round.
+- Normal feature/design plan: 4-6 rounds, 10-16 questions per round.
+- New repo/foundation work: 6-8 rounds, 12-20 questions per round.
+- High-risk, multi-system, API-heavy, data-heavy, or long-running work: 7-10 rounds, 12-20 questions per round.
+
+Do not finalize after one good batch. The first answers reveal the second-order questions; use follow-up rounds to chase those branches down.
+
+### Recommended Round Shape
+
+Adapt to the situation, but start from this shape:
+
+1. **Frame and foundations** - outcome, non-goals, users, success/failure, repo maturity, missing foundational docs.
+2. **Language and scenarios** - domain terms, overloaded words, canonical names, relationships, edge-case examples.
+3. **Architecture and boundaries** - module ownership, data ownership, integration shape, dependency direction, reversibility.
+4. **Testing and evidence** - TDD expectations, public interfaces, E2E path, physical verification, commands, CI.
+5. **Operations and risk** - deployment, rollback, observability, security, privacy, migration, support.
+6. **Agent and maintenance rules** - what future agents must preserve, forbidden shortcuts, docs to update, ADR candidates.
+7. **Branch rounds** - targeted follow-ups based on earlier answers, contradictions, or research findings.
+
+### Coverage Matrix
+
+Before finalizing docs, make sure the questioning covered each relevant row. If a row is irrelevant, record why.
+
+| Area | Ask until resolved | Typical doc target |
+| --- | --- | --- |
+| Outcome | What does success/failure look like? | README, AGENTS.md, goal docs |
+| Users/workflows | Who does what, in what sequence, and where can it fail? | CONTEXT.md, README |
+| Domain language | Which terms are canonical, overloaded, or forbidden? | CONTEXT.md |
+| Boundaries/non-goals | What is explicitly out of scope or owned elsewhere? | AGENTS.md, CONTEXT.md, ADR |
+| Repo foundations | Language, framework, package manager, folder shape, module rules | AGENTS.md, CLAUDE.md, ADR |
+| Architecture | Direction of dependencies, data ownership, integration contracts | ADR, AGENTS.md |
+| Data/API/external systems | Schemas, auth, webhooks, rate limits, version constraints | ADR, README, docs |
+| Testing/evidence | TDD loop, test levels, E2E path, physical verification | AGENTS.md, CLAUDE.md |
+| Ops/security/privacy | Deployment, rollback, observability, access, retention | AGENTS.md, ADR |
+| Agent rules | How future agents research, change, verify, document, and stop | AGENTS.md, CLAUDE.md |
+
+### Question Format
+
+Each question should force a decision, not invite a vague essay.
+
+Use this shape:
+
+```markdown
+Q<round>.<number>. <Decision to resolve?>
+- Why this matters: <specific impact on code/docs/tests/architecture>
+- Repo evidence: <file/path/source observed, or "unknown - needs research">
+- A. <Concrete option with tradeoff>
+- B. <Concrete option with tradeoff>
+- C. <Concrete option with tradeoff>
+- D. <Concrete option with tradeoff>
+- E. Other / custom
+- Recommended: <A/B/C/D/E> - <reason; advisory only, not an answer>
+- Docs affected: <CONTEXT.md | AGENTS.md | CLAUDE.md | ADR | README | other>
+- Follow-up trigger: <what answer would require another question>
+```
+
+Rules:
+
+- Do not ask shallow yes/no questions when a trade-off question would be better.
+- Do not ask "what do you want?" without giving concrete options.
+- Include edge-case scenario questions, not just preference questions.
+- Vary the recommended option position. Never make A the default shape of "good".
+- If research already answers a question, do not ask it. State the finding, cite the source/file, and ask only for confirmation if the decision is consequential.
+- If the user skips a question, mark it unanswered. Do not turn the recommendation into the answer.
+
+### Question Log
+
+For substantial sessions, create or update a question log so later agents can see the decision trail. Prefer the repo's existing docs convention; otherwise use:
+
+```text
+docs/grilling/<topic-slug>-questions.md
+```
+
+The log should contain:
+
+- Each question with stable ID.
+- User answer or `Status: unanswered`.
+- Recommended option, clearly marked advisory.
+- Source/repo evidence.
+- Docs affected.
+- Follow-up questions created by the answer.
+- Final disposition: documented in `CONTEXT.md`, `AGENTS.md`, `CLAUDE.md`, ADR, deferred, or unresolved.
+
+### Finalization Gate
+
+Do not hand off as "done" until:
+
+- Minimum round count for the situation has been met, or the user explicitly stops the grilling.
+- Relevant coverage matrix rows are answered, documented, or explicitly deferred.
+- Unanswered material questions are listed with status and next action.
+- No recommendation has been silently converted into a user answer.
+- Docs touched by resolved answers have been updated.
+- Any hard-to-reverse, surprising, trade-off decision has been considered for an ADR.
 
 ## New Repo Foundation Gate
 
@@ -59,7 +161,7 @@ Create or update:
 
 ### Foundation Questions
 
-Ask a dedicated foundation batch, usually 8-20 multiple-choice questions, covering:
+Ask a dedicated foundation sequence, usually 2-4 rounds of 12-20 multiple-choice questions, covering:
 
 - Product purpose and non-goals.
 - Primary users, workflows, and domain terms.
@@ -156,7 +258,9 @@ Run multiple rounds:
 
 - Minimum: 2 rounds before finalizing consequential docs.
 - Maximum: 10 rounds unless the user explicitly asks for more.
-- Default: 3-5 rounds for normal substantial plans.
+- Default: 4-6 rounds for normal substantial plans.
+- New repo/foundation default: 6-8 rounds.
+- High-risk or long-running default: 7-10 rounds.
 - Per round: ask 8-20 questions when possible.
 - Per question: offer 3-5 meaningful options plus "Other / custom" when appropriate.
 - Recommendations: include a recommended option and reason, but treat it as advice, not an answer.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Grill With Docs"
-  short_description: "Stress-test plans while shaping repo docs"
-  default_prompt: "Use $grill-with-docs to research the repo, run multi-round decision grilling, and update project language, ADRs, and agent guidance."
+  short_description: "Run deep question-heavy repo doc grilling"
+  default_prompt: "Use $grill-with-docs to research the repo, run deep multi-round multiple-choice grilling, and update project language, ADRs, and agent guidance."

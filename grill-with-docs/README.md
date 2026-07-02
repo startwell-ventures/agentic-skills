@@ -15,11 +15,12 @@ This is the foundation-setting companion to `grill-me-goal`: use `grill-with-doc
 
 1. Research the repo before asking avoidable questions.
 2. Use bounded subagent side missions when available.
-3. Ask 2-10 rounds of batched multiple-choice questions.
+3. Ask 2-10 rounds of batched multiple-choice questions, with stronger defaults for substantial work: 4-6 normal, 6-8 new repo/foundation, 7-10 high-risk or long-running.
 4. Never silently assume option A or recommended defaults.
-5. Challenge fuzzy language against code, docs, and concrete scenarios.
-6. Establish `AGENTS.md` / `CLAUDE.md` before moving further in new repos.
-7. Create ADRs only for decisions that are hard to reverse, surprising without context, and the result of real trade-offs.
+5. Track questions in a question log when the session is substantial.
+6. Challenge fuzzy language against code, docs, and concrete scenarios.
+7. Establish `AGENTS.md` / `CLAUDE.md` before moving further in new repos.
+8. Create ADRs only for decisions that are hard to reverse, surprising without context, and the result of real trade-offs.
 
 ## Install
 
