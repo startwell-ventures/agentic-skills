@@ -18,7 +18,7 @@ Use this skill when:
 - Scope, risks, tests, and verification need to be nailed down before execution.
 - You want progress tracked with evidence rather than vibes.
 
-Before using it on a new or under-documented repo, run `grill-with-docs` first to establish foundations.
+On a well-founded repo, this can replace `grill-with-docs` as the upstream spec route. On a new or under-documented repo, the skill should perform a `grill-with-docs`-style foundation preflight internally, then capture those foundations inside the goal package before implementation. The user should not need to issue a separate command.
 
 ## What it produces
 
@@ -45,7 +45,7 @@ A package under `docs/<goal-slug>/`:
 ## How it works
 
 1. **Research first.** Inspect the repo, docs, tests, CI, run harness, and external/API specs.
-2. **Foundation gate.** If the repo lacks foundations, use `grill-with-docs` first.
+2. **Foundation gate.** If the repo lacks foundations, perform a `grill-with-docs`-style foundation preflight internally and capture the missing foundations inside the goal package.
 3. **Test/E2E strategy.** Write `test-plan.md` before writing A/Cs.
 4. **Batched questions.** Ask 2-10 rounds of multi-choice questions. Recommendations are advisory only.
 5. **Write the package.** Large goals should usually have 100-300 phased, test-backed, evidence-gated criteria.

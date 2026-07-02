@@ -49,15 +49,16 @@ The repo guidance must include:
 
 ## Spec + 50-Item Queue Gate
 
-Before implementation, Fable must decide whether an adequate build spec already exists.
+Before implementation, Fable must decide whether an adequate build spec already exists. It should normally consume one upstream spec source: `grill-with-docs` docs/spec output, a `grill-me-goal` package, or another adequate existing spec. It does not require both `grill-with-docs` and `grill-me-goal`.
 
 Look for repo-local sources such as:
 
 - `docs/<goal-slug>/goal.md`, `ac.md`, and `test-plan.md` from `grill-me-goal`.
-- Existing `PRD.md`, `SPEC.md`, `PLAN.md`, ADRs, issue specs, roadmap docs, or task lists.
+- `CONTEXT.md`, `AGENTS.md`, `CLAUDE.md`, ADRs, and question logs produced by `grill-with-docs`.
+- Existing `PRD.md`, `SPEC.md`, `PLAN.md`, issue specs, roadmap docs, or task lists.
 - README/AGENTS/CLAUDE guidance that defines foundations, commands, and acceptance criteria.
 
-A spec is adequate only if it names the concrete outcome, non-goals, acceptance criteria, test/run commands, end-to-end verification path, risks, dependencies, and evidence expectations. If any of those are missing or vague, create a build package before coding. This is the first material deliverable: do not let Fable jump into implementation from a weak prompt.
+A spec is adequate only if it names the concrete outcome, non-goals, acceptance criteria, test/run commands, end-to-end verification path, risks, dependencies, and evidence expectations. If repo foundations are also missing, apply a `grill-with-docs`-style foundation preflight internally before implementation. If the spec is missing or vague, create a build package before coding. This is the first material deliverable: do not let Fable jump into implementation from a weak prompt, and do not require the user to issue separate setup commands.
 
 Default package:
 

@@ -2,7 +2,7 @@
 
 Research and stress-test a plan against the repo's actual code, domain language, docs, and architectural decisions, then update the docs while decisions crystallize.
 
-This is the foundation-setting companion to `grill-me-goal`: use `grill-with-docs` to establish language, principles, ADRs, and agent guidance; use `grill-me-goal` when the work is ready to become a long-running acceptance-criteria package.
+This is the docs/spec route, not a mandatory precursor to every goal. Use `grill-with-docs` to establish language, principles, ADRs, and agent guidance; use `grill-me-goal` instead when the main output should be a long-running acceptance-criteria package. `build-with-fable` can consume the output of either route.
 
 ## When to use it
 

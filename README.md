@@ -24,12 +24,17 @@ These skills are built around a few operating rules:
 
 ## Recommended Flow
 
-For a new feature, repo, or multi-session project:
+For a new feature, repo, or multi-session project, choose **one upstream specification route** first:
 
-1. **`grill-with-docs`** - establish language, repo foundations, agent guidance, and ADRs.
-2. **`grill-me-goal`** - turn the scoped objective into a long-running goal package with acceptance criteria.
-3. **`build-with-fable`** - orchestrate substantial implementation with Fable judgment and Codex execution/verification.
-4. **`ripple-check`** - after implementation changes, audit the blast radius test-first.
+- **Docs/spec route: `grill-with-docs`** - use when the work needs repo foundations, language, ADRs, agent guidance, or a conventional spec before implementation.
+- **Goal route: `grill-me-goal`** - use instead when the work should become a long-running goal package with durable acceptance criteria and resume prompts.
+
+Then:
+
+1. **`build-with-fable`** consumes the output of either route: `grill-with-docs` docs/specs, a `grill-me-goal` package, or another adequate existing spec. If no adequate spec exists, it creates a build package and 50-item execution queue before coding.
+2. **`ripple-check`** runs after implementation changes to audit the blast radius test-first.
+
+For a brand-new or under-documented repo, the chosen upstream route should perform a `grill-with-docs`-style foundation preflight internally before implementation. The user should not need to know to issue a separate command.
 
 For a small local fix, skip the orchestration and use the narrowest relevant skill.
 
@@ -66,7 +71,7 @@ Use this quick route:
 
 - **"We need foundations, language, principles, ADRs, or CLAUDE/AGENTS docs."** Use `grill-with-docs`.
 - **"We need a hundred-hour checklist with acceptance criteria."** Use `grill-me-goal`.
-- **"We need Fable to run the build while Codex executes and verifies."** Use `build-with-fable`.
+- **"We already have a spec/goal package and need Fable to run the build while Codex executes and verifies."** Use `build-with-fable`.
 - **"We changed code and need to know what else broke."** Use `ripple-check`.
 
 ## Repo Structure

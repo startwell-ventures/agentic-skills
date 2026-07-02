@@ -4,6 +4,8 @@ Set up and run a **Fable-led, Codex-assisted** build workflow with a real execut
 
 Fable owns orchestration, taste, product/architecture judgment, decomposition, and final synthesis. Codex owns well-specified implementation, computer use, UI/browser verification, reviews, rescue tasks, and evidence collection.
 
+It should normally start from one upstream spec source: `grill-with-docs` docs/spec output, a `grill-me-goal` package, or another adequate existing spec. It does not require both `grill-with-docs` and `grill-me-goal`.
+
 ## When to use it
 
 Use this skill for:
@@ -32,7 +34,7 @@ The first gate is repo setup. The skill creates or updates `CLAUDE.md` with:
 
 ## Build package
 
-If an adequate spec already exists, Fable uses it. If not, the first material output is a package such as:
+If an adequate spec already exists from `grill-with-docs`, `grill-me-goal`, or another repo convention, Fable uses it. If not, the first material output is a package such as:
 
 ```text
 docs/<build-slug>/
@@ -50,6 +52,8 @@ docs/<build-slug>/
 ```
 
 `build-queue.md` contains the next 50 build items for substantial work. The first 10 must be immediately executable; the remaining 40 still need outcomes, dependencies, and verification paths. After each wave, Fable replenishes the queue toward 50 until fewer than 50 real items remain.
+
+If repo foundations are missing, Fable performs the foundation preflight internally using the `grill-with-docs` behavior. The user should not need to issue a separate command before using this skill.
 
 ## How the workflow runs
 
