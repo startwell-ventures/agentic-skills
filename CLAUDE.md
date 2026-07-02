@@ -40,6 +40,30 @@ How to apply:
 - Codex is the execution and verification partner for well-specified implementation, computer use, UI/browser verification, code review, adversarial review, rescue/debug passes, log reduction, and evidence collection.
 - Do not outsource responsibility. Treat delegated reports as leads until important claims are verified against cited files, commands, screenshots, or logs.
 
+### Spec and execution queue
+
+Before implementation, Fable checks whether an adequate repo-local spec already exists. A usable spec names the outcome, non-goals, acceptance criteria, test/run commands, end-to-end verification path, risks, dependencies, and evidence expectations.
+
+If the spec is missing or weak, Fable's first material output is a build package under `docs/<build-slug>/`:
+
+```text
+spec.md
+build-plan.md
+build-queue.md
+context.md
+research.md
+test-plan.md
+delegation.md
+verification.md
+decisions.md
+risks.md
+execution-log.md
+```
+
+For substantial work, `build-queue.md` starts with the next 50 build items. The first 10 must be immediately executable; the remaining items still need outcomes, dependencies, and verification paths. Each execution wave selects 3-8 unblocked items, delegates bounded work to Codex/subagents, integrates results, verifies end to end, records evidence, and replenishes the queue toward 50 until fewer than 50 real items remain.
+
+Every turn should make forward progress: tighten the spec, plan/replenish queue items, launch a bounded side mission, implement an item, verify evidence, update docs, or document the smallest unblock path and move to the next unblocked item.
+
 ### Codex access from Claude Code
 
 Prefer OpenAI's Codex plugin for Claude Code.

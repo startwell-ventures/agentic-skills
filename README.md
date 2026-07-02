@@ -17,7 +17,7 @@ These skills are built around a few operating rules:
 
 | Skill | Use it when | Main output |
 | --- | --- | --- |
-| [build-with-fable](./build-with-fable) | You want Fable to orchestrate substantial implementation while Codex handles well-specified execution, computer use, verification, reviews, and rescue tasks. | A repo-level Fable + Codex workflow in `CLAUDE.md`, plus a disciplined delegation process. |
+| [build-with-fable](./build-with-fable) | You want Fable to orchestrate substantial implementation while Codex handles well-specified execution, computer use, verification, reviews, and rescue tasks. | A repo-level Fable + Codex workflow, build spec package, 50-item execution queue, delegation plan, and evidence ledger. |
 | [grill-with-docs](./grill-with-docs) | You need to stress-test a plan against repo reality, sharpen language, establish foundations, or update agent-facing docs before implementation. | Updated `CONTEXT.md`, `AGENTS.md`, `CLAUDE.md`, ADRs, question logs, and related docs. |
 | [grill-me-goal](./grill-me-goal) | You want to turn a vague or long-running objective into a durable goal package with detailed acceptance criteria. | `docs/<goal-slug>/` with `goal.md`, `ac.md`, `context.md`, `research.md`, `test-plan.md`, and execution logs. |
 | [ripple-check](./ripple-check) | You changed code and need to find/fix the blast radius before shipping. | Test-first ripple fixes, validation results, and docs updates. |

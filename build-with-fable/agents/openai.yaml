@@ -1,4 +1,4 @@
 interface:
   display_name: "Build With Fable"
-  short_description: "Use Fable to orchestrate Codex execution"
-  default_prompt: "Use $build-with-fable to set up and run a Fable-led, Codex-assisted build workflow."
+  short_description: "Fable plans 50 build items; Codex executes"
+  default_prompt: "Use $build-with-fable to create or refresh the build spec, plan the next 50 build items, and run Fable-led Codex-assisted execution end to end."

@@ -1,6 +1,6 @@
 # build-with-fable
 
-Set up and run a **Fable-led, Codex-assisted** build workflow.
+Set up and run a **Fable-led, Codex-assisted** build workflow with a real execution system: repo-local specs, a 50-item build queue, efficient subagents, Codex implementation/review, and end-to-end evidence.
 
 Fable owns orchestration, taste, product/architecture judgment, decomposition, and final synthesis. Codex owns well-specified implementation, computer use, UI/browser verification, reviews, rescue tasks, and evidence collection.
 
@@ -12,6 +12,7 @@ Use this skill for:
 - User-facing UI, copy, product flow, or API design.
 - Ambiguous architecture or product trade-offs.
 - Multi-file work that benefits from parallel research, implementation, testing, and review.
+- Work that lacks a strong spec and needs Fable to create the next 50 build items before coding.
 - PRs where you would otherwise risk throwing away an end-to-end agent-generated branch.
 
 Skip it for tiny local fixes where delegation overhead is larger than the task.
@@ -27,14 +28,39 @@ The first gate is repo setup. The skill creates or updates `CLAUDE.md` with:
 - Thin wrapper pattern for Claude agents that need Codex.
 - Delegation packet requirements.
 - Review and verification bar.
+- A mandatory spec + 50-item execution queue gate.
+
+## Build package
+
+If an adequate spec already exists, Fable uses it. If not, the first material output is a package such as:
+
+```text
+docs/<build-slug>/
+  spec.md
+  build-plan.md
+  build-queue.md
+  context.md
+  research.md
+  test-plan.md
+  delegation.md
+  verification.md
+  decisions.md
+  risks.md
+  execution-log.md
+```
+
+`build-queue.md` contains the next 50 build items for substantial work. The first 10 must be immediately executable; the remaining 40 still need outcomes, dependencies, and verification paths. After each wave, Fable replenishes the queue toward 50 until fewer than 50 real items remain.
 
 ## How the workflow runs
 
-1. **Fable plans.** Fable decomposes the work, identifies risks, and decides what needs taste or judgment.
-2. **Codex executes.** Codex handles clear-spec implementation, browser/computer-use verification, reviews, rescue tasks, and evidence collection.
-3. **Delegated work returns evidence.** Every handoff asks for files, commands, diffs, screenshots, logs, failures, and uncertainties.
-4. **Fable judges.** Fable reopens important cited files, resolves conflicts, rejects mediocre output, and decides whether to escalate.
-5. **Codex reviews.** Non-trivial changes get Codex review; risky choices get adversarial review.
+1. **Fable keeps forward progress.** Every turn advances the spec, queue, delegation, implementation, verification, docs, or unblock path.
+2. **Fable establishes the spec.** If specs are missing or weak, Fable creates the build package before coding.
+3. **Fable plans the queue.** Substantial work starts with the next 50 build items, including tests, verification, dependencies, and delegation target.
+4. **Fable launches side missions.** Subagents map code, test harnesses, UX flows, external APIs, risks, and verification paths.
+5. **Codex executes bounded items.** Codex handles clear-spec implementation, browser/computer-use verification, reviews, rescue tasks, and evidence collection.
+6. **Fable integrates waves.** Fable selects 3-8 unblocked build items, integrates results, verifies evidence, updates docs, and replenishes the queue.
+7. **Codex reviews.** Non-trivial changes get Codex review; risky choices get adversarial review.
+8. **Done means observed end to end.** User-facing work must be physically verified in the running app or real workflow, not just tested in isolation.
 
 ## Codex plugin setup
 
