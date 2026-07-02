@@ -1,6 +1,13 @@
 # CLAUDE.md
 
-This repo contains personal agent skills. Keep skills concise, validate them, and update the root README when adding or changing a skill.
+Follow `AGENTS.md` as the cross-agent source of truth. This file contains Claude-specific guidance, especially for Fable-led / Codex-assisted build work.
+
+## Repo Rules
+
+- Keep skills concise and executable.
+- Validate changed skills with `quick_validate.py`.
+- Update root `README.md` and the relevant skill README when public behavior changes.
+- Preserve the model-routing, evidence, and verification bars below.
 
 ## Build With Fable + Codex
 

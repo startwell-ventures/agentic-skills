@@ -6,7 +6,19 @@ Use it to **define, sharpen, persist, resume, audit, or run** a multi-session go
 
 ## Pairs with Codex `/goal`
 
-`grill-me-goal` writes the package; **Codex's long-running `/goal` skill executes it** by pointing at the generated goal prompt and working the checklist over long, multi-session runs. Use `grill-me-goal` to plan, `/goal` to run.
+`grill-me-goal` writes the package; Codex's long-running `/goal` skill executes it by pointing at the generated goal prompt and working the checklist over long, multi-session runs. Use `grill-me-goal` to plan, `/goal` to run.
+
+## When to use it
+
+Use this skill when:
+
+- The work will span many sessions.
+- A goal needs dozens or hundreds of acceptance criteria.
+- A future agent must resume from repo docs without chat history.
+- Scope, risks, tests, and verification need to be nailed down before execution.
+- You want progress tracked with evidence rather than vibes.
+
+Before using it on a new or under-documented repo, run `grill-with-docs` first to establish foundations.
 
 ## What it produces
 
@@ -14,35 +26,35 @@ A package under `docs/<goal-slug>/`:
 
 | File | Purpose |
 | --- | --- |
-| `goal.md` | Source of truth + the complete, self-contained goal/resume prompt |
-| `ac.md` | Phased checklist, each phase ending in an end-to-end gate |
-| `context.md` | Repo-grounded context from actual inspection |
-| `research.md` | External/API truth with cited primary sources + access dates |
-| `test-plan.md` | TDD + end-to-end strategy with runnable commands per layer |
-| `questions.md` | Batched multiple-choice clarifications + answers/assumptions |
-| `decisions.md` | Durable decisions affecting execution |
-| `risks.md` | Risk register with mitigations and linked A/Cs |
-| `execution-log.md` | Resume history (red/green/refactor + end-to-end run per entry) |
+| `goal.md` | Source of truth plus complete goal/resume prompt. |
+| `ac.md` | Phased checklist, each phase ending in an end-to-end gate. |
+| `context.md` | Repo-grounded context from actual inspection. |
+| `research.md` | External/API truth with cited primary sources and access dates. |
+| `test-plan.md` | TDD and end-to-end strategy with runnable commands per layer. |
+| `questions.md` | Batched multiple-choice clarifications plus answers/assumptions. |
+| `decisions.md` | Durable decisions affecting execution. |
+| `risks.md` | Risk register with mitigations and linked A/Cs. |
+| `execution-log.md` | Resume history: red/green/refactor plus end-to-end run per entry. |
 
 ## Three non-negotiable doctrines
 
-1. **Test-driven** — every behavior change is failing-test-first (red → green → refactor), vertical slices, testing behavior through public interfaces. Green unit tests are **not** "done": you must also physically verify in the running app (click through it in a browser for web work, or run the real device/CLI/service).
-2. **Evidence before progression** — no box is ticked and no phase advances without concrete proof (the physical run, command/test output, screenshot, log, link). Phase gates must be green with evidence before the next phase starts.
-3. **End-to-end completion** — every feature is wired and demonstrated working through the full stack (UI → API → data → back) in a real run, never a stubbed half. Each milestone ends with an end-to-end gate.
+1. **Test-driven.** Every behavior change is failing-test-first: red, green, refactor. Tests verify behavior through public interfaces.
+2. **Evidence before progression.** No A/C or phase gate is checked without concrete proof.
+3. **End-to-end completion.** A feature is done only when it is wired and observed through the full user/system path.
 
 ## How it works
 
-1. **Research first** — inspect the repo (docs, tests, CI, run harness) and research external API/SDK specs, limits, and current best practices; fan out to subagents in parallel when available.
-2. **Foundation gate** — if this is a new or under-documented repo, establish `AGENTS.md`, `CLAUDE.md`, domain language, and project principles via `grill-with-docs` before writing the long-running goal package.
-3. **Design the test/E2E strategy** in `test-plan.md` before writing criteria.
-4. **Batched multiple-choice questions** — 2-10 rounds, many decisions at once (default 8-20 per batch), not one at a time. Recommendations are advisory only: the skill must never assume option A or silently apply defaults unless the user explicitly says to use recommended defaults.
-5. **Write the package** — 100–300 phased, test-backed, evidence-gated criteria for large goals.
-6. **Forward progress** — the generated goal prompt forces every execution turn to complete a concrete action, use bounded subagent side missions when available, and stay focused on the current phase/A/C.
-7. **Audit** until a fresh agent can resume from the docs alone.
+1. **Research first.** Inspect the repo, docs, tests, CI, run harness, and external/API specs.
+2. **Foundation gate.** If the repo lacks foundations, use `grill-with-docs` first.
+3. **Test/E2E strategy.** Write `test-plan.md` before writing A/Cs.
+4. **Batched questions.** Ask 2-10 rounds of multi-choice questions. Recommendations are advisory only.
+5. **Write the package.** Large goals should usually have 100-300 phased, test-backed, evidence-gated criteria.
+6. **Force forward progress.** The generated goal prompt requires each execution turn to complete a concrete action.
+7. **Audit.** A fresh agent must be able to resume from docs alone.
 
 ## Companion: `/tdd`
 
-The red → green → refactor core comes from [mattpocock/skills](https://github.com/mattpocock/skills). Install it so the test-first ethos is live during execution; the generated goal prompt instructs the agent to adopt it:
+The red/green/refactor core comes from [mattpocock/skills](https://github.com/mattpocock/skills). Install it so the test-first ethos is live during execution:
 
 ```bash
 npx skills add mattpocock/skills
@@ -51,10 +63,10 @@ npx skills add mattpocock/skills
 ## Install
 
 ```bash
-npx skills add e4stwood/agentic-skills        # via Agent Skills spec
+npx skills add e4stwood/agentic-skills
 # or
-cp -R grill-me-goal ~/.claude/skills/         # Claude Code
-cp -R grill-me-goal ~/.codex/skills/          # Codex
+cp -R grill-me-goal ~/.claude/skills/
+cp -R grill-me-goal ~/.codex/skills/
 ```
 
-Invoke with `/grill-me-goal` (Claude Code) or `$grill-me-goal` (Codex).
+Invoke with `/grill-me-goal` in Claude Code or `$grill-me-goal` in Codex.

@@ -4,12 +4,23 @@ Research and stress-test a plan against the repo's actual code, domain language,
 
 This is the foundation-setting companion to `grill-me-goal`: use `grill-with-docs` to establish language, principles, ADRs, and agent guidance; use `grill-me-goal` when the work is ready to become a long-running acceptance-criteria package.
 
+## When to use it
+
+Use this skill when:
+
+- A repo is new or under-documented.
+- A plan uses vague or overloaded terms.
+- You need `AGENTS.md`, `CLAUDE.md`, `CONTEXT.md`, or ADRs before implementation.
+- A design needs to be challenged against actual code and existing decisions.
+- Future agents need durable context instead of chat-only decisions.
+
 ## What it updates
 
-- `CONTEXT.md` / `CONTEXT-MAP.md` for domain language and bounded contexts
-- `docs/adr/` for consequential architecture decisions
-- `AGENTS.md` and `CLAUDE.md` for agent-facing project rules
-- Existing README or docs when foundations, commands, or principles change
+- `CONTEXT.md` / `CONTEXT-MAP.md` for domain language and bounded contexts.
+- `docs/adr/` for consequential architecture decisions.
+- `AGENTS.md` and `CLAUDE.md` for agent-facing project rules.
+- Question logs under `docs/grilling/` for substantial sessions.
+- Existing README or docs when foundations, commands, or principles change.
 
 ## Core behavior
 
@@ -21,6 +32,18 @@ This is the foundation-setting companion to `grill-me-goal`: use `grill-with-doc
 6. Challenge fuzzy language against code, docs, and concrete scenarios.
 7. Establish `AGENTS.md` / `CLAUDE.md` before moving further in new repos.
 8. Create ADRs only for decisions that are hard to reverse, surprising without context, and the result of real trade-offs.
+
+## New repo foundation gate
+
+Before implementation, the skill establishes:
+
+- Product purpose and non-goals.
+- Language/runtime/framework/package manager.
+- Folder structure and module boundaries.
+- Test, TDD, E2E, and physical verification expectations.
+- Build/run commands.
+- Deployment, CI, observability, and rollback expectations.
+- Agent working rules.
 
 ## Install
 
