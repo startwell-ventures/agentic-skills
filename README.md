@@ -43,7 +43,15 @@ For a small local fix, skip the orchestration and use the narrowest relevant ski
 Install the whole collection with the Agent Skills CLI:
 
 ```bash
-npx skills add e4stwood/agentic-skills
+npx skills add startwell-ventures/agentic-skills
+```
+
+See what is available, install one skill, or pull the latest versions later:
+
+```bash
+npx skills add startwell-ventures/agentic-skills --list
+npx skills add startwell-ventures/agentic-skills --skill ripple-check
+npx skills update
 ```
 
 Or copy a single skill folder into an agent's skills directory:
@@ -92,6 +100,15 @@ README.md               # Collection overview
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full change workflow.
 
+Start from a clone of the org repo:
+
+```bash
+git clone git@github.com:startwell-ventures/agentic-skills.git
+cd agentic-skills
+```
+
+A new skill is a top-level folder with `SKILL.md`, `README.md` and `agents/openai.yaml` (layout in [CONTRIBUTING.md](./CONTRIBUTING.md#required-files)). Once it is pushed to `main`, anyone can install it with `npx skills add startwell-ventures/agentic-skills --skill <skill-name>`.
+
 When adding or changing a skill:
 
 1. Update `SKILL.md`.
@@ -136,7 +153,7 @@ cp -R ripple-check ~/.claude/skills/
 cp -R ripple-check ~/.agents/skills/
 ```
 
-Prefer installing via `npx skills add e4stwood/agentic-skills` for normal use.
+Prefer installing via `npx skills add startwell-ventures/agentic-skills` for normal use.
 
 ## Release Checklist
 

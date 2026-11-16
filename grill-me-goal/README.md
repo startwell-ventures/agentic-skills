@@ -63,7 +63,7 @@ npx skills add mattpocock/skills
 ## Install
 
 ```bash
-npx skills add e4stwood/agentic-skills
+npx skills add startwell-ventures/agentic-skills
 # or
 cp -R grill-me-goal ~/.claude/skills/
 cp -R grill-me-goal ~/.codex/skills/

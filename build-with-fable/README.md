@@ -116,7 +116,7 @@ Rules:
 ## Install
 
 ```bash
-npx skills add e4stwood/agentic-skills
+npx skills add startwell-ventures/agentic-skills
 # or
 cp -R build-with-fable ~/.claude/skills/
 cp -R build-with-fable ~/.codex/skills/

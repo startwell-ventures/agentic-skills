@@ -53,7 +53,7 @@ The final report should include:
 ## Install
 
 ```bash
-npx skills add e4stwood/agentic-skills
+npx skills add startwell-ventures/agentic-skills
 # or
 cp -R ripple-check ~/.codex/skills/
 cp -R ripple-check ~/.claude/skills/

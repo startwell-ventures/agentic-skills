@@ -71,7 +71,7 @@ git status --short --branch
 For normal use, prefer:
 
 ```bash
-npx skills add e4stwood/agentic-skills
+npx skills add startwell-ventures/agentic-skills
 ```
 
 When testing local changes, copy only the changed skill into the agent runtime you are validating:
